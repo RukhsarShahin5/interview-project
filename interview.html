@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interview Simulation</title>
+</head>
+<style>
+  body {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #f0f0f0;
+  }
+
+  .container {
+    text-align: center;
+    width: 80%;
+    max-width: 600px;
+  }
+
+  .interview {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 30px;
+  }
+
+  .person {
+    text-align: center;
+  }
+
+  .avatar {
+    width: 400px;
+    height: 250px;
+    border-radius: 50%;
+    /* margin-bottom: 10px; */
+  }
+
+  .question-section {
+    margin: 20px 0;
+  }
+
+  #question {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+  }
+
+  textarea {
+    width: 100%;
+    height: 100px;
+    margin-top: 10px;
+    padding: 10px;
+    font-size: 16px;
+  }
+
+  button {
+    padding: 10px 20px;
+    font-size: 18px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+
+  button:hover {
+    background-color: #0056b3;
+  }
+
+
+
+</style>
+<body>
+  <div class="container">
+    <div class="interview">
+      <div class="person">
+        <img src="inter.png" alt="Interviewer" class="avatar">
+        <h3>Face Interview </h3>
+      </div>
+    </div>
+
+    <div class="question-section">
+      <h2 id="question">Click the button to get the next question!</h2>
+      <textarea id="answer" placeholder="Type your answer here..."></textarea>
+    </div>
+
+    <button id="nextQuestionBtn">Next Question</button>
+  </div>
+
+  <script>
+    const questions = [
+      "Tell me about yourself.",
+      "Tell me about yourself.",
+     "What are your strengths?",
+      "What are your weaknesses?",
+      "Why do you want to work at this company?",
+      "Where do you see yourself in 5 years?",
+      "Tell me about a time you faced a challenge at work.",
+      "Why should we hire you?"
+    ];
+
+    let currentQuestion = 0;
+
+    document.getElementById('nextQuestionBtn').addEventListener('click', function() {
+      const answer = document.getElementById('answer').value;
+      
+      if (currentQuestion < questions.length) {
+        if (answer) {
+          console.log(`Question: ${questions[currentQuestion]}\nAnswer: ${answer}`);
+          // Clear the answer textarea after submission
+          document.getElementById('answer').value = '';
+          currentQuestion++;
+        } else {
+          alert("Please provide an answer before moving to the next question.");
+          return;
+        }
+
+        if (currentQuestion < questions.length) {
+          document.getElementById('question').textContent = questions[currentQuestion];
+        } else {
+          document.getElementById('question').textContent = "End of interview!";
+          this.disabled = true; // Disable button after all questions are asked
+        }
+      }
+    });
+  </script>
+</body>
+</html>
